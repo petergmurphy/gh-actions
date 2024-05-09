@@ -1,7 +1,10 @@
 name: Lint, test, and deploy
-on: push
+on:
+  push:
+    paths-ignore:
+      - "events-deep-dive"
 jobs:
-  lint:
+  run_test_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -10,21 +13,7 @@ jobs:
         run: npm i
       - name: lint
         run: npm run lint
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: install dependencies
-        run: npm i
       - name: test
         run: npm run test
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: install dependencies
-        run: npm i
       - name: deploy
         run: npm run deploy
